@@ -10,15 +10,15 @@
     <script src="https://d3js.org/d3.v3.min.js"></script>
 </head>
 
-<body style="background:#80BFFF">
+<body style="background:#ffc299">
 <div align="center">
 <div id="div1"><h2>WELCOME</h2></div>
 <h3>   CSE 5335 Web Data Management </h3>
 <h4>  Project 2  Spring 2016 </h4>
-<div ng-app="loadFunction" class ="container">
-    <div ng-controller="loadController" class ="container" bgcolor=#bc8f8f>
-        <pre ng-show="donemsg" style="opacity:0.8;background:#80BFFF;margin-top:20%;margin-left: 50%;margin-right: 50%" class="zoom">Loading List Finished</pre>
-        <table ng-show="loadVisible" style="margin-left: 30%;margin-right: 50%" class ="table table-hover">
+<div ng-app="loadFunction" class ="container" align="left">
+    <div ng-controller="loadController" class ="container" bgcolor=#ffc299>
+        <pre ng-show="donemsg"  class="zoom">Loading List Finished</pre>
+        <table ng-show="loadVisible" style="margin-left: 10%;margin-right: 70%" class ="table table-hover">
             <th class="scaling">{{header}}</th>
         </table>
         <button ng-show="buttonshow" type ="button" style="margin-left: 40%;margin-right: 50%" class="btn btn-primary" ng-click="startAnimation()">Get State list!!</button>
@@ -49,17 +49,17 @@
                 $.get('/data', function (data) {
                     if(i < 20) {
                         //Display the database record received in the response of AJAX request  with 20 records displayed at a time
-                        intro [i] = d3.select("body").select("table").select("tbody").append("tr").append("td").attr("class","scaling").text("Value: "+data[i].DataValueAlt+"...StateAbbr : "+data[i].LocationAbbr+"...State:"+data[i].LocationDesc).style("opacity", 0.0);
+                        intro [i] = d3.select("body").select("table").select("tbody").append("tr").append("td").attr("class","scaling").text("ID: "+data[i].id+" ..........		"+"	State:  "+data[i].LocationDesc+"	..........	"+"		StateAbbr :   "+data[i].LocationAbbr+"	..........	"+"		Value: "+data[i].DataValueAlt).style("opacity", 0.0);
                         //Use opacity for fading animation effect
-                        intro[i].transition().duration(2500).style("opacity", 1.0);
+                        intro[i].transition().duration(2500).style("opacity", 0.5);
                     }else if(i >= 21){
                             //get the reference of the table data elements to remove the older records and add the newly received data
                             while(i >= 20)
                             {
                                 i=i%20;
                             }
-                            intro[i].text("Value: "+data[i].DataValueAlt+"...StateAbbr :   "+data[i].LocationAbbr+"...State:  "+data[i].LocationDesc).style("opacity", 0.0);
-                            intro[i].transition().duration(2500).style("opacity", 1.0);
+                            intro[i].text("ID: "+data[i].id+"	..........	"+"		State:  "+data[i].LocationDesc+" ..........		"+"		StateAbbr :   "+data[i].LocationAbbr+" ..........		"+"		Value: "+data[i].DataValueAlt).style("opacity", 0.0);
+                            intro[i].transition().duration(2500).style("opacity", 0.5);
                     }
                 });
             }
@@ -70,7 +70,7 @@
                  $scope.donemsg=true;
                 for(i=0;i<20;i++)
                 {
-                     intro[i].transition().duration(1000).style("opacity",0.1);
+                     intro[i].transition().duration(1000).style("opacity",0.5);
                 }
             });
         }
